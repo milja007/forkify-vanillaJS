@@ -1,3 +1,5 @@
 node_modules
 dist 
 .parcel-cache
+.npm-cache
+.npm-logs

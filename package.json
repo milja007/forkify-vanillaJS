@@ -10,15 +10,19 @@
   },
   "author": "Borna Miljković",
   "license": "ISC",
+  "engines": {
+    "node": ">=22 <25",
+    "npm": ">=10"
+  },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.13.3",
-    "parcel": "^2.13.3",
-    "svgo": "^3.3.2"
+    "@parcel/transformer-sass": "^2.16.4",
+    "parcel": "^2.16.4",
+    "svgo": "^4.0.0"
   },
   "dependencies": {
-    "core-js": "^3.40.0",
+    "core-js": "^3.48.0",
     "fracty": "^1.0.12",
     "regenerator-runtime": "^0.14.1",
-    "sass": "^1.85.0"
+    "sass": "^1.97.3"
   }
 }
