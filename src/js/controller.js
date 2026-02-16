@@ -7,10 +7,6 @@ import paginationView from './views/paginationView.js';
 import bookMarksView from './views/bookMarksView.js';
 import addRecipeView from './views/addRecipeView.js';
 
-//pollyfilling all else
-import 'core-js/stable';
-//pollyfilling async await
-import 'regenerator-runtime/runtime';
 // if (module.hot) {
 //   module.hot.accept();
 // }

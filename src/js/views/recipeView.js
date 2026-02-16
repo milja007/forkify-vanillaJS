@@ -1,6 +1,12 @@
 import View from './View.js';
-import icons from 'url:../../img/icons.svg';
-import fracty from 'fracty';
+
+const icons = new URL('../../img/icons.svg', import.meta.url).href;
+const formatQuantity = quantity =>
+  Number.isFinite(quantity)
+    ? new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(
+        quantity
+      )
+    : '';
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
@@ -124,9 +130,7 @@ class RecipeView extends View {
   <svg class="recipe__icon">
     <use href="${icons}#icon-check"></use>
   </svg>
-  <div class="recipe__quantity">${
-    ing.quantity ? fracty(ing.quantity).toString() : ''
-  }</div>
+  <div class="recipe__quantity">${formatQuantity(ing.quantity)}</div>
   <div class="recipe__description">
     <span class="recipe__unit">${ing.unit}</span>
     ${ing.description}

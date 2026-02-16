@@ -1,7 +1,5 @@
 //parcel automatic
-import { aync } from 'regenerator-runtime';
-
-import { TIMEOUT_SEC } from './config';
+import { TIMEOUT_SEC } from './config.js';
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -12,16 +10,17 @@ const timeout = function (s) {
 };
 export const AJAX = async function (url, uploadData = undefined) {
   try {
+    const requestUrl = url.trim();
     //conditionally defyning fetchPro variable
     const fetchPro = uploadData
-      ? fetch(url, {
+      ? fetch(requestUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(uploadData),
         })
-      : fetch(url);
+      : fetch(requestUrl);
 
     const res = await Promise.race([fetchPro, timeout(TIMEOUT_SEC)]);
     const data = await res.json();

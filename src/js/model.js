@@ -1,7 +1,5 @@
-import { aync } from 'regenerator-runtime';
-import { API_URL, RES_PER_PAGE, API_KEY } from './config';
-import { AJAX } from './helpers';
-import { get } from 'core-js';
+import { API_URL, RES_PER_PAGE, API_KEY } from './config.js';
+import { AJAX } from './helpers.js';
 
 export const state = {
   recipe: {},

@@ -1,5 +1,6 @@
-import View from './View';
-import icons from 'url:../../img/icons.svg';
+import View from './View.js';
+
+const icons = new URL('../../img/icons.svg', import.meta.url).href;
 class PaginatationView extends View {
   _parentElement = document.querySelector('.pagination');
   addHandlerClick(handler) {

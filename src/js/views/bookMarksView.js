@@ -1,4 +1,4 @@
-import View from './View';
+import View from './View.js';
 import previewView from './previewView.js';
 class BookMarksView extends View {
   _errorMessage = `No bookmarks yet. Find a nice recipe and bookmark it ;) `;
