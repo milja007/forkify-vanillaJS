@@ -16,6 +16,30 @@ $bp-medium: 61.25em; // 980px
 $bp-small: 37.5em; // 600px
 $bp-smallest: 31.25em; // 500px
 
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('../fonts/nunito-sans-latin-400.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('../fonts/nunito-sans-latin-600.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('../fonts/nunito-sans-latin-700.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -37,7 +61,14 @@ html {
 }
 
 body {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family:
+    'Nunito Sans',
+    'Segoe UI',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   font-weight: 400;
   line-height: 1.6;
   color: $color-grey-dark-1;
@@ -68,4 +99,16 @@ body {
     margin: 0;
     border-radius: 0;
   }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

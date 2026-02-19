@@ -12,6 +12,31 @@ export const state = {
   bookMarked: [],
 };
 
+const isValidHttpUrl = function (value) {
+  if (typeof value !== 'string') return false;
+
+  try {
+    const parsedUrl = new URL(value.trim());
+    return parsedUrl.protocol === 'http:' || parsedUrl.protocol === 'https:';
+  } catch {
+    return false;
+  }
+};
+
+const isValidBookmark = function (bookmark) {
+  return (
+    bookmark &&
+    typeof bookmark === 'object' &&
+    typeof bookmark.id === 'string' &&
+    bookmark.id.trim() !== '' &&
+    typeof bookmark.title === 'string' &&
+    bookmark.title.trim() !== '' &&
+    typeof bookmark.publisher === 'string' &&
+    bookmark.publisher.trim() !== '' &&
+    isValidHttpUrl(bookmark.image)
+  );
+};
+
 const createRecipeObject = function (data) {
   const { recipe } = data.data;
   return {
@@ -102,7 +127,25 @@ export const deleteBookmark = function (id) {
 
 const init = function () {
   const storage = localStorage.getItem('bookmarks');
-  if (storage) state.bookMarked = JSON.parse(storage);
+  if (!storage) return;
+
+  try {
+    const parsedBookmarks = JSON.parse(storage);
+
+    if (!Array.isArray(parsedBookmarks)) {
+      state.bookMarked = [];
+      persistBookmarks();
+      return;
+    }
+
+    const sanitizedBookmarks = parsedBookmarks.filter(isValidBookmark);
+    state.bookMarked = sanitizedBookmarks;
+
+    if (sanitizedBookmarks.length !== parsedBookmarks.length) persistBookmarks();
+  } catch {
+    state.bookMarked = [];
+    persistBookmarks();
+  }
 };
 init();
 // console.log(state.bookMarked);
@@ -114,6 +157,12 @@ const clearBookmarks = function () {
 
 export const uploadRecipe = async function (newRecipe) {
   try {
+    if (!isValidHttpUrl(newRecipe.sourceUrl))
+      throw new Error('Please provide a valid Source URL (http/https).');
+
+    if (!isValidHttpUrl(newRecipe.image))
+      throw new Error('Please provide a valid Image URL (http/https).');
+
     const ingredients = Object.entries(newRecipe)
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
       .map(ing => {
@@ -128,10 +177,10 @@ export const uploadRecipe = async function (newRecipe) {
       });
 
     const recipe = {
-      title: newRecipe.title,
-      source_url: newRecipe.sourceUrl,
-      image_url: newRecipe.image,
-      publisher: newRecipe.publisher,
+      title: newRecipe.title.trim(),
+      source_url: newRecipe.sourceUrl.trim(),
+      image_url: newRecipe.image.trim(),
+      publisher: newRecipe.publisher.trim(),
       cooking_time: newRecipe.cookingTime,
       servings: +newRecipe.servings,
       ingredients,

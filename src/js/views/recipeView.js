@@ -102,6 +102,7 @@ class RecipeView extends View {
       class="btn--small recipe__btn"
       href="${this._data.sourceUrl}"
       target="_blank"
+      rel="noopener noreferrer"
     >
       <span>Directions</span>
       <svg class="search__icon">

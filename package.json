@@ -7,7 +7,10 @@
     "dev": "parcel index.html",
     "start": "parcel index.html",
     "build": "parcel build index.html --dist-dir ./dist --public-url ./ --no-cache",
-    "postbuild": "cp src/img/icons.svg dist/icons.c5b0f01c.svg"
+    "postbuild": "cp src/img/icons.svg dist/icons.c5b0f01c.svg && cp robots.txt dist/robots.txt",
+    "audit:lighthouse": "node scripts/audit-lighthouse.mjs",
+    "audit:lighthouse:mobile": "node scripts/audit-lighthouse.mjs --preset=mobile",
+    "audit:lighthouse:desktop": "node scripts/audit-lighthouse.mjs --preset=desktop"
   },
   "author": "Borna Miljković",
   "license": "ISC",
@@ -17,6 +20,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.16.4",
+    "lighthouse": "^13.0.3",
     "parcel": "^2.16.4",
     "svgo": "^4.0.0"
   },
